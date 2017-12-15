@@ -4,14 +4,13 @@
 #
 Name     : pywbem
 Version  : 0.11.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/pywbem/pywbem/archive/v0.11.0.tar.gz
 Source0  : https://github.com/pywbem/pywbem/archive/v0.11.0.tar.gz
 Summary  : Python WBEM Client
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: pywbem-bin
-Requires: pywbem-legacypython
 Requires: pywbem-python3
 Requires: pywbem-python
 BuildRequires : pbr
@@ -39,19 +38,9 @@ Group: Binaries
 bin components for the pywbem package.
 
 
-%package legacypython
-Summary: legacypython components for the pywbem package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the pywbem package.
-
-
 %package python
 Summary: python components for the pywbem package.
 Group: Default
-Requires: pywbem-legacypython
 Requires: pywbem-python3
 
 %description python
@@ -75,15 +64,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1513205410
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1513351743
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1513205410
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -98,10 +84,6 @@ echo ----[ mark ]----
 /usr/bin/wbemcli
 /usr/bin/wbemcli.bat
 /usr/bin/wbemcli.py
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files python
 %defattr(-,root,root,-)
