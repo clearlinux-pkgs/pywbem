@@ -4,7 +4,7 @@
 #
 Name     : pywbem
 Version  : 0.11.0
-Release  : 7
+Release  : 8
 URL      : https://github.com/pywbem/pywbem/archive/v0.11.0.tar.gz
 Source0  : https://github.com/pywbem/pywbem/archive/v0.11.0.tar.gz
 Summary  : Python WBEM Client
