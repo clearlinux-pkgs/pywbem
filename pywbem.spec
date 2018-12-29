@@ -4,16 +4,17 @@
 #
 Name     : pywbem
 Version  : 0.12.6
-Release  : 28
+Release  : 29
 URL      : https://files.pythonhosted.org/packages/e1/10/eec363ccce3674118256709072427802460175ed15f1e90c21f9295c4c14/pywbem-0.12.6.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/10/eec363ccce3674118256709072427802460175ed15f1e90c21f9295c4c14/pywbem-0.12.6.tar.gz
 Summary  : pywbem - A WBEM client
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
-Requires: pywbem-bin
-Requires: pywbem-python3
-Requires: pywbem-license
-Requires: pywbem-python
+Requires: pywbem-bin = %{version}-%{release}
+Requires: pywbem-license = %{version}-%{release}
+Requires: pywbem-python = %{version}-%{release}
+Requires: pywbem-python3 = %{version}-%{release}
+Requires: M2Crypto
 Requires: PyYAML
 Requires: ordereddict
 Requires: pbr
@@ -22,12 +23,8 @@ Requires: python-mock
 Requires: six
 BuildRequires : buildreq-distutils3
 BuildRequires : pbr
-BuildRequires : pluggy
 BuildRequires : ply
-BuildRequires : py-python
-BuildRequires : pytest
-BuildRequires : tox
-BuildRequires : virtualenv
+BuildRequires : python-mock
 
 %description
 Pywbem is a WBEM client, written in pure Python. It supports Python 2 and
@@ -48,18 +45,10 @@ Pywbem is a WBEM client, written in pure Python. It supports Python 2 and
 %package bin
 Summary: bin components for the pywbem package.
 Group: Binaries
-Requires: pywbem-license
+Requires: pywbem-license = %{version}-%{release}
 
 %description bin
 bin components for the pywbem package.
-
-
-%package doc
-Summary: doc components for the pywbem package.
-Group: Documentation
-
-%description doc
-doc components for the pywbem package.
 
 
 %package license
@@ -73,7 +62,7 @@ license components for the pywbem package.
 %package python
 Summary: python components for the pywbem package.
 Group: Default
-Requires: pywbem-python3
+Requires: pywbem-python3 = %{version}-%{release}
 
 %description python
 python components for the pywbem package.
@@ -96,20 +85,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536879140
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1546125513
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/pywbem
-cp LICENSE.txt %{buildroot}/usr/share/doc/pywbem/LICENSE.txt
-cp packaging/debian/copyright %{buildroot}/usr/share/doc/pywbem/packaging_debian_copyright
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pywbem
+cp LICENSE.txt %{buildroot}/usr/share/package-licenses/pywbem/LICENSE.txt
+cp packaging/debian/copyright %{buildroot}/usr/share/package-licenses/pywbem/packaging_debian_copyright
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -125,13 +110,10 @@ echo ----[ mark ]----
 /usr/bin/wbemcli.bat
 /usr/bin/wbemcli.py
 
-%files doc
-%defattr(0644,root,root,0755)
-%doc /usr/share/doc/pywbem/*
-
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/pywbem/LICENSE.txt
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pywbem/LICENSE.txt
+/usr/share/package-licenses/pywbem/packaging_debian_copyright
 
 %files python
 %defattr(-,root,root,-)
