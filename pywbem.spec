@@ -4,12 +4,12 @@
 #
 Name     : pywbem
 Version  : 0.12.6
-Release  : 30
+Release  : 31
 URL      : https://files.pythonhosted.org/packages/e1/10/eec363ccce3674118256709072427802460175ed15f1e90c21f9295c4c14/pywbem-0.12.6.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/10/eec363ccce3674118256709072427802460175ed15f1e90c21f9295c4c14/pywbem-0.12.6.tar.gz
 Summary  : pywbem - A WBEM client
 Group    : Development/Tools
-License  : LGPL-2.0 LGPL-2.1
+License  : LGPL-2.0 LGPL-2.1 any option) or(at version version-2.1 your
 Requires: pywbem-bin = %{version}-%{release}
 Requires: pywbem-license = %{version}-%{release}
 Requires: pywbem-python = %{version}-%{release}
@@ -27,20 +27,10 @@ BuildRequires : ply
 BuildRequires : python-mock
 
 %description
-Pywbem is a WBEM client, written in pure Python. It supports Python 2 and
-        Python 3. Pywbem also contains a WBEM indication listener.
-        
-        A WBEM client allows issuing operations to a WBEM server, using the
-        `CIM/WBEM standards`_ defined by the DMTF, for the purpose of performing
-        systems management tasks. A WBEM indication listener is used to wait for
-        and process notifications emitted by a WBEM server, also for the purpose
-        of systems management.
-        
-        CIM/WBEM infrastructure is used for a wide variety of systems management
-        tasks in the industry.
-        
-        For more information on pywbem, see the `pywbem readme`_, and the
-        `pywbem documentation`_.
+PyWBEM is a Python library for making CIM operations over HTTP using the 
+WBEM CIM-XML protocol.  WBEM is a manageability protocol, like SNMP,
+standardised by the Distributed Management Task Force (DMTF) available
+at http://www.dmtf.org/standards/wbem.
 
 %package bin
 Summary: bin components for the pywbem package.
@@ -85,7 +75,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546125513
+export SOURCE_DATE_EPOCH=1551039513
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
