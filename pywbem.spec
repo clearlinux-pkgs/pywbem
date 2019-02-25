@@ -4,12 +4,12 @@
 #
 Name     : pywbem
 Version  : 0.13.0
-Release  : 33
+Release  : 34
 URL      : https://files.pythonhosted.org/packages/81/7d/acb3ec2b85cbd9f50109a51b5a56d48c611a6074620dc1e8f79ff97a8ef1/pywbem-0.13.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/81/7d/acb3ec2b85cbd9f50109a51b5a56d48c611a6074620dc1e8f79ff97a8ef1/pywbem-0.13.0.tar.gz
 Summary  : pywbem - A WBEM client
 Group    : Development/Tools
-License  : LGPL-2.0 LGPL-2.1 option)
+License  : LGPL-2.0 LGPL-2.1
 Requires: pywbem-bin = %{version}-%{release}
 Requires: pywbem-license = %{version}-%{release}
 Requires: pywbem-python = %{version}-%{release}
@@ -75,7 +75,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551109977
+export SOURCE_DATE_EPOCH=1551110141
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
