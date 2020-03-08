@@ -4,7 +4,7 @@
 #
 Name     : pywbem
 Version  : 0.14.6
-Release  : 43
+Release  : 44
 URL      : https://files.pythonhosted.org/packages/98/d4/de6a5ff3735bbd8511dfcbf2c811a873895620673fcfe257a4e5b8ee3ae1/pywbem-0.14.6.tar.gz
 Source0  : https://files.pythonhosted.org/packages/98/d4/de6a5ff3735bbd8511dfcbf2c811a873895620673fcfe257a4e5b8ee3ae1/pywbem-0.14.6.tar.gz
 Summary  : pywbem - A WBEM client
@@ -31,10 +31,20 @@ BuildRequires : python-mock
 BuildRequires : six
 
 %description
-PyWBEM is a Python library for making CIM operations over HTTP using the 
-WBEM CIM-XML protocol.  WBEM is a manageability protocol, like SNMP,
-standardised by the Distributed Management Task Force (DMTF) available
-at http://www.dmtf.org/standards/wbem.
+Pywbem is a WBEM client, written in pure Python. It supports Python 2 and
+        Python 3. Pywbem also contains a WBEM indication listener.
+        
+        A WBEM client allows issuing operations to a WBEM server, using the
+        `CIM/WBEM standards`_ defined by the DMTF, for the purpose of performing
+        systems management tasks. A WBEM indication listener is used to wait for
+        and process notifications emitted by a WBEM server, also for the purpose
+        of systems management.
+        
+        CIM/WBEM infrastructure is used for a wide variety of systems management
+        tasks in the industry.
+        
+        For more information on pywbem, see the `pywbem readme`_, and the
+        `pywbem documentation`_.
 
 %package bin
 Summary: bin components for the pywbem package.
@@ -66,6 +76,11 @@ python components for the pywbem package.
 Summary: python3 components for the pywbem package.
 Group: Default
 Requires: python3-core
+Provides: pypi(pywbem)
+Requires: pypi(mock)
+Requires: pypi(ply)
+Requires: pypi(pyyaml)
+Requires: pypi(six)
 
 %description python3
 python3 components for the pywbem package.
@@ -73,14 +88,14 @@ python3 components for the pywbem package.
 
 %prep
 %setup -q -n pywbem-0.14.6
+cd %{_builddir}/pywbem-0.14.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570783818
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1583704439
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -96,8 +111,8 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pywbem
-cp LICENSE.txt %{buildroot}/usr/share/package-licenses/pywbem/LICENSE.txt
-cp packaging/debian/copyright %{buildroot}/usr/share/package-licenses/pywbem/packaging_debian_copyright
+cp %{_builddir}/pywbem-0.14.6/LICENSE.txt %{buildroot}/usr/share/package-licenses/pywbem/caeb68c46fa36651acf592771d09de7937926bb3
+cp %{_builddir}/pywbem-0.14.6/packaging/debian/copyright %{buildroot}/usr/share/package-licenses/pywbem/e34dd4d11328a83495d277f091ec6f5ee87e4d01
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -116,8 +131,8 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/pywbem/LICENSE.txt
-/usr/share/package-licenses/pywbem/packaging_debian_copyright
+/usr/share/package-licenses/pywbem/caeb68c46fa36651acf592771d09de7937926bb3
+/usr/share/package-licenses/pywbem/e34dd4d11328a83495d277f091ec6f5ee87e4d01
 
 %files python
 %defattr(-,root,root,-)
