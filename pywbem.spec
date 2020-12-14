@@ -4,7 +4,7 @@
 #
 Name     : pywbem
 Version  : 1.1.2
-Release  : 54
+Release  : 55
 URL      : https://files.pythonhosted.org/packages/7d/f6/feb08fd66eef381d5e977bdfcc5536999ec6489eba826a147737ed7e6f66/pywbem-1.1.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/7d/f6/feb08fd66eef381d5e977bdfcc5536999ec6489eba826a147737ed7e6f66/pywbem-1.1.2.tar.gz
 Summary  : pywbem - A WBEM client
