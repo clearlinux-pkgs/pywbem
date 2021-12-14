@@ -4,7 +4,7 @@
 #
 Name     : pywbem
 Version  : 1.3.0
-Release  : 69
+Release  : 70
 URL      : https://files.pythonhosted.org/packages/03/43/3ae558e238974efe8c9b9304dfb64d49febc15860b103abc3fdab9e187c4/pywbem-1.3.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/03/43/3ae558e238974efe8c9b9304dfb64d49febc15860b103abc3fdab9e187c4/pywbem-1.3.0.tar.gz
 Summary  : pywbem - A WBEM client
